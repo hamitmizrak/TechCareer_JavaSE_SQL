@@ -46,12 +46,17 @@ public class DatabaseConnection extends DatabaseInformation {
             }
         } catch (SQLException sql) {
             sql.printStackTrace();
-            log.error(DatabaseConnection.class + " isnt create instance");
+            log.error(DatabaseConnection.class + " isn't create instance "+sql);
         } catch (Exception exception) {
             exception.printStackTrace();
-            log.error(DatabaseConnection.class + " isnt create instance");
+            log.error(DatabaseConnection.class + " isn't create instance "+exception);
         }
         return instance;
     } // end DatabaseConnection
+
+    // PSVM
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        // DatabaseConnection databaseConnection=new DatabaseConnection();
+    }
 
 } //end class
