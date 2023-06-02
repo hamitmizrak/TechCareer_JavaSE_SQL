@@ -16,8 +16,7 @@ public class RegisterDao implements IDaoConnection<RegisterDto> {
     @Override
     public void create(RegisterDto registerDto) {
         try (Connection connection = getInterfaceConnection()) {
-            //-- insert
-            //insert into blog.register (name,surname,email,password) values ("name44","surname44","email44@gmail.com","password44");
+            // insert into blog.register (name,surname,email,password) values ("name44","surname44","email44@gmail.com","password44");
             String sql = "insert into blog.register (name,surname,email,password) values (?,?,?,?);";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, registerDto.getName());
@@ -42,8 +41,7 @@ public class RegisterDao implements IDaoConnection<RegisterDto> {
     @Override
     public void update(RegisterDto registerDto) {
         try (Connection connection = getInterfaceConnection()) {
-            //-- update
-            //update  blog.register set name=?,surname=?,email=?,password=? where id=?;
+            // update  blog.register set name=?,surname=?,email=?,password=? where id=?;
             String sql = "update blog.register set name=?,surname=?,email=?,password=? where id=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, registerDto.getName());
@@ -69,8 +67,7 @@ public class RegisterDao implements IDaoConnection<RegisterDto> {
     @Override
     public void delete(RegisterDto registerDto) {
         try (Connection connection = getInterfaceConnection()) {
-            //-- delete
-            //delete from  blog.register  where id=?;
+            // delete from  blog.register  where id=?;
             String sql = "delete from  blog.register  where id=?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setLong(1, registerDto.getId());
