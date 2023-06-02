@@ -44,7 +44,7 @@ public class RegisterDao implements IDaoConnection<RegisterDto> {
         try (Connection connection = getInterfaceConnection()) {
             //-- update
             //update  blog.register set name=?,surname=?,email=?,password=? where id=?;
-            String sql = "blog.register set name=?,surname=?,email=?,password=? where id=?;";
+            String sql = "update blog.register set name=?,surname=?,email=?,password=? where id=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, registerDto.getName());
             preparedStatement.setString(2, registerDto.getSurname());
