@@ -9,6 +9,7 @@ import java.sql.SQLException;
 
 // LOMBOK
 @Log4j2
+@Getter @Setter
 public class DatabaseConnection extends DatabaseInformation {
 
     // Connection
@@ -20,7 +21,7 @@ public class DatabaseConnection extends DatabaseInformation {
 
     // Singleton Design Pattern
     // Singleton Class
-    @Getter @Setter
+
     private static DatabaseConnection instance;
 
     // Singleton Constructor: instance oluşturulmaması
