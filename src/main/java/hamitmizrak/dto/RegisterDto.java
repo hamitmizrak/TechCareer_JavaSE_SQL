@@ -10,6 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Log4j2
+
 public class RegisterDto {
     //Field
     private Long id;
