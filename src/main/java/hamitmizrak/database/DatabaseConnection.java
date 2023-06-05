@@ -28,7 +28,7 @@ public class DatabaseConnection extends DatabaseInformation {
     private DatabaseConnection() throws ClassNotFoundException, SQLException {
         try {
             // Database ilgili class erişim sağlamak
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName(forNameData);
             //log.info("Driver Yüklendi");
             //connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/blog", "root", "root");
             connection = DriverManager.getConnection(url, user, password);

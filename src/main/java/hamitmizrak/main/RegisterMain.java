@@ -56,8 +56,11 @@ public class RegisterMain {
         System.out.println("LIST");
         ArrayList<RegisterDto> list = registerController.list();
         list.forEach((temp) -> {
-            System.out.println(temp);
-            //System.out.printf();
+            //System.out.println(temp);
+            // s d f
+            System.out.printf("%d, %20s, %20s, %20s, %20s, %20s ",temp.getId(),temp.getName(), temp.getSurname(), temp.getEmail(),temp.getPassword(), temp.getCreatedDate());
+            System.out.println();
+            //System.out.printf("%d, %15s, %15s, %15s, %15s, %15s%n ",temp.getId(),temp.getName(), temp.getSurname(), temp.getEmail(),temp.getPassword(), temp.getCreatedDate());
         });
         return list;
     }
