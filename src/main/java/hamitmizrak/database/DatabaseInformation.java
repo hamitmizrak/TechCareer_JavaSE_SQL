@@ -16,8 +16,8 @@ public class DatabaseInformation {
         this.url = "jdbc:mysql://localhost:3306/blog";
         this.user = "root";       //Access denied for user 'root44'@'localhost' (using password: YES)
         this.password = "root";   //Access denied for user 'root'@'localhost'   (using password: YES)
-        this.forNameData = "com.mysql.jdbc.Driver";
-        //this.forNameData = "com.mysql.cj.jdbc.Driver";
+        //this.forNameData = "com.mysql.jdbc.Driver";
+        this.forNameData = "com.mysql.cj.jdbc.Driver";
 
         //POSTGRESQL
         /*this.url="jdbc:postgresql://localhost:5432/blog";

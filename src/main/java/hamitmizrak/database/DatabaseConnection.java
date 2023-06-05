@@ -29,10 +29,10 @@ public class DatabaseConnection extends DatabaseInformation {
         try {
             // Database ilgili class erişim sağlamak
             Class.forName("com.mysql.jdbc.Driver");
-            log.info("Driver Yüklendi");
+            //log.info("Driver Yüklendi");
             //connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/blog", "root", "root");
             connection = DriverManager.getConnection(url, user, password);
-            log.info("Database Bağlantısını Başarılı");
+            //log.info("Database Bağlantısını Başarılı");
         } catch (Exception exception) {
             log.error(DatabaseConnection.class + " Driver or connection Failed !!!!");
             exception.printStackTrace();

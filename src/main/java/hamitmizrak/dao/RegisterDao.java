@@ -58,7 +58,7 @@ public class RegisterDao implements IDaoConnection<RegisterDto> {
             preparedStatement.setString(2, registerDto.getSurname());
             preparedStatement.setString(3, registerDto.getEmail());
             preparedStatement.setString(4, registerDto.getPassword());
-            preparedStatement.setLong(5, registerDto.getId());
+            preparedStatement.setInt(5, registerDto.getId());
             // GÜNCELLEME , TRANSACTION (Create, Delete,Update)
             int rowsEffected = preparedStatement.executeUpdate();
             if(rowsEffected>0){
@@ -120,7 +120,7 @@ public class RegisterDao implements IDaoConnection<RegisterDto> {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 registerDto=new RegisterDto();
-                registerDto.setId(resultSet.getLong("id"));
+                registerDto.setId(resultSet.getInt("id"));
                 registerDto.setName(resultSet.getString("name"));
                 registerDto.setSurname(resultSet.getString("surname"));
                 registerDto.setEmail(resultSet.getString("email"));

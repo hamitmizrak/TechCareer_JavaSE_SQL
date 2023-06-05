@@ -11,13 +11,12 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @Log4j2
-public class RegisterDto { //extends BaseDto
+public class RegisterDto{ //extends BaseDto
     //Field
-    private Long id;
+    private int id;
     private String name;
     private String surname;
     private String email;
     private String password;
     private Date createdDate=new Date(System.currentTimeMillis());
-
 } //end class
