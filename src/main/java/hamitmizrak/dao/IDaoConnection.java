@@ -11,14 +11,18 @@ public interface IDaoConnection<T> {
     // CREATE
     public void create(T t) throws SQLException, ClassNotFoundException;
 
+    // LIST
+    public ArrayList<T> list();
+
+    // UPDATE
+    public T findById(int id);
+
     // UPDATE
     public void update(T t);
 
     // DELETE
     public void delete(T t);
 
-    // LIST
-    public ArrayList<T> list();
 
     // Govdeli Connection
     default Connection getInterfaceConnection() throws SQLException, ClassNotFoundException {

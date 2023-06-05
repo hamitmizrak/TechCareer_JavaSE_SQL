@@ -10,12 +10,16 @@ public interface IRegisterController {
     // CREATE
     public void create(RegisterDto registerDto) throws SQLException, ClassNotFoundException;
 
+    // LIST
+    public ArrayList<RegisterDto> list();
+
+    public RegisterDto findById(int id);
+
     // UPDATE
     public void update(RegisterDto registerDto);
 
     // DELETE
     public void delete(RegisterDto registerDto);
 
-    // LIST
-    public ArrayList<RegisterDto> list();
+
 }

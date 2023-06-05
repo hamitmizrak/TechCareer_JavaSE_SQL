@@ -23,7 +23,7 @@ public class RegisterMain {
         Scanner klavye = new Scanner(System.in);
         System.out.println("\n### Lütfen seçim yapınız. ###");
         //ENUM
-        System.out.println("1-) CREATE \n2-) LIST\n3-) UPDATE\n4-) DELETE\n5-) ÇIKIŞ");
+        System.out.println("1-) CREATE \n2-) LIST\n3-) FIND\n4-) UPDATE\n5-) DELETE\n6-) ÇIKIŞ");
         int chooise = klavye.nextInt();
         return chooise;
     }
@@ -63,6 +63,18 @@ public class RegisterMain {
             //System.out.printf("%d, %15s, %15s, %15s, %15s, %15s%n ",temp.getId(),temp.getName(), temp.getSurname(), temp.getEmail(),temp.getPassword(), temp.getCreatedDate());
         });
         return list;
+    }
+
+    private static RegisterDto findById(){
+        System.out.println("FIND");
+        RegisterControllerImpl registerController = new RegisterControllerImpl();
+        Scanner klavye = new Scanner(System.in);
+        RegisterDto registerDeleteDto = new RegisterDto();
+        System.out.println("Lütfen Objeyi bulmak  id yazınız.");
+        registerDeleteDto.setId(klavye.nextInt());
+        RegisterDto registerDto=  registerController.findById(registerDeleteDto.getId());
+        System.out.println(registerDto);
+        return registerDto;
     }
 
     private static RegisterDto update() {
@@ -128,13 +140,17 @@ public class RegisterMain {
                     break;
                 case 3:
                     list();
-                    update();
+                    findById();
                     break;
                 case 4:
                     list();
-                    delete();
+                    update();
                     break;
                 case 5:
+                    list();
+                    delete();
+                    break;
+                case 6:
                     logout();
                     break;
                 default:

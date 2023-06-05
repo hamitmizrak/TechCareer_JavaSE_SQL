@@ -45,6 +45,67 @@ public class RegisterDao implements IDaoConnection<RegisterDto> {
         }
     }
 
+
+    // LIST
+    @Override
+    public ArrayList<RegisterDto> list() {
+        // Liste
+        ArrayList<RegisterDto> registerDtoList=new ArrayList<>();
+        // Dto
+        RegisterDto registerDto;
+        try (Connection connection = getInterfaceConnection()) {
+            // Select
+            String sql = "select * from blog.register";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            // SİLME , TRANSACTION (Create, Delete,Update)
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                registerDto=new RegisterDto();
+                registerDto.setId(resultSet.getInt("id"));
+                registerDto.setName(resultSet.getString("name"));
+                registerDto.setSurname(resultSet.getString("surname"));
+                registerDto.setEmail(resultSet.getString("email"));
+                registerDto.setPassword(resultSet.getString("password"));
+                registerDtoList.add(registerDto);
+            }
+        } catch (SQLException sql) {
+            sql.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return registerDtoList;
+    }
+
+    @Override
+    public RegisterDto findById(int id) {
+        // Liste
+        ArrayList<RegisterDto> registerDtoList=new ArrayList<>();
+        // Dto
+        RegisterDto registerDto;
+        try (Connection connection = getInterfaceConnection()) {
+            // Select
+            String sql = "select * from blog.register where id="+id;
+            //String sql = "select * from blog.register where id=:id ";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            // SİLME , TRANSACTION (Create, Delete,Update)
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                registerDto=new RegisterDto();
+                registerDto.setId(resultSet.getInt("id"));
+                registerDto.setName(resultSet.getString("name"));
+                registerDto.setSurname(resultSet.getString("surname"));
+                registerDto.setEmail(resultSet.getString("email"));
+                registerDto.setPassword(resultSet.getString("password"));
+                registerDtoList.add(registerDto);
+            }
+        } catch (SQLException sql) {
+            sql.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return registerDtoList.get(0);
+    }
+
     // UPDATE
     @Override
     public void update(RegisterDto registerDto) {
@@ -105,33 +166,5 @@ public class RegisterDao implements IDaoConnection<RegisterDto> {
         }
     }
 
-    // LIST
-    @Override
-    public ArrayList<RegisterDto> list() {
-        // Liste
-        ArrayList<RegisterDto> registerDtoList=new ArrayList<>();
-        // Dto
-        RegisterDto registerDto;
-        try (Connection connection = getInterfaceConnection()) {
-            // Select
-            String sql = "select * from blog.register";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            // SİLME , TRANSACTION (Create, Delete,Update)
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()){
-                registerDto=new RegisterDto();
-                registerDto.setId(resultSet.getInt("id"));
-                registerDto.setName(resultSet.getString("name"));
-                registerDto.setSurname(resultSet.getString("surname"));
-                registerDto.setEmail(resultSet.getString("email"));
-                registerDto.setPassword(resultSet.getString("password"));
-                registerDtoList.add(registerDto);
-            }
-        } catch (SQLException sql) {
-            sql.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        return registerDtoList;
-    }
+
 }
