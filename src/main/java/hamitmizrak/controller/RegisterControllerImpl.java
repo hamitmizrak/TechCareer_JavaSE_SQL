@@ -2,13 +2,13 @@ package hamitmizrak.controller;
 
 import hamitmizrak.dao.RegisterDao;
 import hamitmizrak.dto.RegisterDto;
+import hamitmizrak.exception.ResourceNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RegisterControllerImpl implements IRegisterController {
 
     private RegisterDao registerDao=new RegisterDao();
-
 
     // CREATE
     @Override
@@ -24,21 +24,27 @@ public class RegisterControllerImpl implements IRegisterController {
 
     // FIND BY ID
     @Override
-    public RegisterDto findById(int id) {
+    public RegisterDto findById(Long id) {
         return registerDao.findById(id);
     }
 
     // UPDATE
     @Override
     public void update(RegisterDto registerDto) {
-        registerDao.update(registerDto);
+        RegisterDto findById=findById(registerDto.getId());
+        if(findById!=null)
+         registerDao.update(registerDto);
+        else
+            throw new ResourceNotFoundException(registerDto.getId()+" id Bulunamadı");
     }
 
     //DELETE
     @Override
     public void delete(RegisterDto registerDto) {
-        registerDao.delete(registerDto);
+        RegisterDto findById=findById(registerDto.getId());
+        if(findById!=null)
+            registerDao.delete(registerDto);
+        else
+            throw new ResourceNotFoundException(registerDto.getId()+" id Bulunamadı");
     }
-
-
 }

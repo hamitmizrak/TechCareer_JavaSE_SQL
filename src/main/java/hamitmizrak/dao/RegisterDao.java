@@ -1,6 +1,7 @@
 package hamitmizrak.dao;
 
 import hamitmizrak.dto.RegisterDto;
+import hamitmizrak.exception.ResourceNotFoundException;
 import lombok.extern.log4j.Log4j2;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -61,7 +62,7 @@ public class RegisterDao implements IDaoConnection<RegisterDto> {
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 registerDto=new RegisterDto();
-                registerDto.setId(resultSet.getInt("id"));
+                registerDto.setId(resultSet.getLong("id"));
                 registerDto.setName(resultSet.getString("name"));
                 registerDto.setSurname(resultSet.getString("surname"));
                 registerDto.setEmail(resultSet.getString("email"));
@@ -77,33 +78,33 @@ public class RegisterDao implements IDaoConnection<RegisterDto> {
     }
 
     @Override
-    public RegisterDto findById(int id) {
-        // Liste
-        ArrayList<RegisterDto> registerDtoList=new ArrayList<>();
+    public RegisterDto findById(Long id) {
         // Dto
-        RegisterDto registerDto;
+        RegisterDto registerDto=registerDto=new RegisterDto();
         try (Connection connection = getInterfaceConnection()) {
             // Select
             String sql = "select * from blog.register where id="+id;
+            //String sql = "select * from blog.register where id=?";
             //String sql = "select * from blog.register where id=:id ";
+            System.out.println(sql);
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            //preparedStatement.setInt(1, id);
             // SİLME , TRANSACTION (Create, Delete,Update)
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
-                registerDto=new RegisterDto();
-                registerDto.setId(resultSet.getInt("id"));
+                registerDto.setId(resultSet.getLong("id"));
                 registerDto.setName(resultSet.getString("name"));
                 registerDto.setSurname(resultSet.getString("surname"));
                 registerDto.setEmail(resultSet.getString("email"));
                 registerDto.setPassword(resultSet.getString("password"));
-                registerDtoList.add(registerDto);
             }
-        } catch (SQLException sql) {
-            sql.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e){
+            e.printStackTrace();
         }
-        return registerDtoList.get(0);
+        if(registerDto.getId()==null){
+            throw new ResourceNotFoundException(id+" Bulunamadı");
+        }
+        return registerDto;
     }
 
     // UPDATE
@@ -119,7 +120,7 @@ public class RegisterDao implements IDaoConnection<RegisterDto> {
             preparedStatement.setString(2, registerDto.getSurname());
             preparedStatement.setString(3, registerDto.getEmail());
             preparedStatement.setString(4, registerDto.getPassword());
-            preparedStatement.setInt(5, registerDto.getId());
+            preparedStatement.setLong(5, registerDto.getId());
             // GÜNCELLEME , TRANSACTION (Create, Delete,Update)
             int rowsEffected = preparedStatement.executeUpdate();
             if(rowsEffected>0){
@@ -166,5 +167,4 @@ public class RegisterDao implements IDaoConnection<RegisterDto> {
         }
     }
 
-
-}
+}//end class

@@ -1,7 +1,6 @@
 package hamitmizrak.controller;
 
 import hamitmizrak.dto.RegisterDto;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -13,7 +12,7 @@ public interface IRegisterController {
     // LIST
     public ArrayList<RegisterDto> list();
 
-    public RegisterDto findById(int id);
+    public RegisterDto findById(Long id);
 
     // UPDATE
     public void update(RegisterDto registerDto);
@@ -21,5 +20,4 @@ public interface IRegisterController {
     // DELETE
     public void delete(RegisterDto registerDto);
 
-
-}
+} //end interface

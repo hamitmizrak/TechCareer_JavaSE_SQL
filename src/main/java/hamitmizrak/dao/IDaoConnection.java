@@ -15,7 +15,7 @@ public interface IDaoConnection<T> {
     public ArrayList<T> list();
 
     // UPDATE
-    public T findById(int id);
+    public T findById(Long id);
 
     // UPDATE
     public void update(T t);

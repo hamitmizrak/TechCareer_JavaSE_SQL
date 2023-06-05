@@ -2,20 +2,27 @@ package hamitmizrak.main;
 
 import hamitmizrak.controller.RegisterControllerImpl;
 import hamitmizrak.dto.RegisterDto;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-// Create SCANNER
+
 // Find Optional
-// RegisterDto BaseDto
-// instance Look !!!
-
-
 public class RegisterMain {
+
+    // Constructor Speed Data
+    public RegisterMain() throws SQLException, ClassNotFoundException {
+        RegisterControllerImpl registerController = new RegisterControllerImpl();
+        for (int i = 0; i <=5 ; i++) {
+            RegisterDto registerDto = new RegisterDto();
+            registerDto.setName("name"+i);
+            registerDto.setSurname("surname"+i);
+            registerDto.setEmail("email+i");
+            registerDto.setPassword("password+i");
+            registerController.create(registerDto);
+            System.out.printf("%20s%n ",registerDto);
+        }
+    }
 
     // METHOD
     // Scanner user data
@@ -28,6 +35,7 @@ public class RegisterMain {
         return chooise;
     }
 
+    // CREATE
     private static RegisterDto create() throws SQLException, ClassNotFoundException {
         System.out.println("CREATE");
         RegisterControllerImpl registerController = new RegisterControllerImpl();
@@ -51,6 +59,7 @@ public class RegisterMain {
         return registerDto;
     }
 
+    // LIST
     private static List<RegisterDto> list() {
         RegisterControllerImpl registerController = new RegisterControllerImpl();
         System.out.println("LIST");
@@ -65,18 +74,20 @@ public class RegisterMain {
         return list;
     }
 
+    // FIND
     private static RegisterDto findById(){
         System.out.println("FIND");
         RegisterControllerImpl registerController = new RegisterControllerImpl();
         Scanner klavye = new Scanner(System.in);
         RegisterDto registerDeleteDto = new RegisterDto();
         System.out.println("Lütfen Objeyi bulmak  id yazınız.");
-        registerDeleteDto.setId(klavye.nextInt());
+        registerDeleteDto.setId(klavye.nextLong());
         RegisterDto registerDto=  registerController.findById(registerDeleteDto.getId());
         System.out.println(registerDto);
         return registerDto;
     }
 
+    // UPDATE
     private static RegisterDto update() {
         System.out.println("UPDATE");
         RegisterControllerImpl registerController = new RegisterControllerImpl();
@@ -86,10 +97,10 @@ public class RegisterMain {
         // BaseDto
         // CommandLineRunner
         String name, surname, email, password;
-        int id;
+        Long id;
         // SCANNER
         System.out.println("id Giriniz");
-        id = klavye.nextInt();
+        id = klavye.nextLong();
         klavye.nextLine();
         System.out.println("Adınızı Giriniz");
         name = klavye.nextLine();
@@ -100,26 +111,28 @@ public class RegisterMain {
         System.out.println("Password Giriniz");
         password = klavye.nextLine();
         RegisterDto registerUpdateDto = RegisterDto.builder()
-                .id(id)
                 .name(name)
                 .surname(surname)
                 .email(email)
                 .password(password)
                 .build();
+        registerUpdateDto.setId(id);
         registerController.update(registerUpdateDto);
         return registerUpdateDto;
     }
 
+    // DELETE
     private static void delete() {
         System.out.println("DELETE");
         RegisterControllerImpl registerController = new RegisterControllerImpl();
         Scanner klavye = new Scanner(System.in);
         RegisterDto registerDeleteDto = new RegisterDto();
         System.out.println("Lütfen silmek istediğiniz id yazınız.");
-        registerDeleteDto.setId(klavye.nextInt());
+        registerDeleteDto.setId(klavye.nextLong());
         registerController.delete(registerDeleteDto);
     }
 
+    // LOGOUT
     private static void logout() {
         System.out.println("ÇIKIŞ");
         System.exit(0);
@@ -128,6 +141,8 @@ public class RegisterMain {
 
     // method Chooise
     private static void methodChooise() throws SQLException, ClassNotFoundException {
+        // Speed Data
+        RegisterMain registerMain=new RegisterMain();
         // sonsuz döngü => for(;;){}
         while (true) {
             int userData = userData();
@@ -163,5 +178,6 @@ public class RegisterMain {
     // psvm
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         methodChooise();
-    }
-}
+    } //end PSVM
+
+} //end class

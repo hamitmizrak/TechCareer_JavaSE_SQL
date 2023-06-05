@@ -1,9 +1,10 @@
 package hamitmizrak.database;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 // LOMBOK
-@Data
+@Getter @Setter
 public class DatabaseInformation {
     private String url;
     private String user;

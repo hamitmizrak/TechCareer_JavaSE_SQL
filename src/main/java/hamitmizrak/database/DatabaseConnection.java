@@ -21,7 +21,6 @@ public class DatabaseConnection extends DatabaseInformation {
 
     // Singleton Design Pattern
     // Singleton Class
-
     private static DatabaseConnection instance;
 
     // Singleton Constructor: instance oluşturulmaması
@@ -29,8 +28,8 @@ public class DatabaseConnection extends DatabaseInformation {
         try {
             // Database ilgili class erişim sağlamak
             Class.forName(forNameData);
-            //log.info("Driver Yüklendi");
-            //connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/blog", "root", "root");
+            // log.info("Driver Yüklendi");
+            // connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/blog", "root", "root");
             connection = DriverManager.getConnection(url, user, password);
             //log.info("Database Bağlantısını Başarılı");
         } catch (Exception exception) {
