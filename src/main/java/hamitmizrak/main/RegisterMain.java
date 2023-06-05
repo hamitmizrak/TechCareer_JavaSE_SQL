@@ -5,13 +5,17 @@ import hamitmizrak.dto.RegisterDto;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
+// Create SCANNER
+// Find Optional
+// RegisterDto BaseDto
+// instance Look !!!
 
 public class RegisterMain {
 
     // Scanner user data
     private static int userData() {
         Scanner klavye = new Scanner(System.in);
-        System.out.println("Lütfen seçim yapınız");
+        System.out.println("\n### Lütfen seçim yapınız. ###");
         //ENUM
         System.out.println("1-) CREATE \n2-) LIST\n3-) UPDATE\n4-) DELETE\n5-) ÇIKIŞ");
         int chooise = klavye.nextInt();
@@ -27,6 +31,7 @@ public class RegisterMain {
             switch (userData) {
                 case 1:
                     System.out.println("CREATE");
+                    // SCANNER
                     RegisterDto registerDto = RegisterDto.builder()
                             .name("adı44")
                             .surname("soyadı44")
@@ -34,6 +39,7 @@ public class RegisterMain {
                             .password("password44")
                             .build();
                     registerController.create(registerDto);
+
                     break;
 
                 case 2:

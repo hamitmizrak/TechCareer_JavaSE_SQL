@@ -14,10 +14,10 @@ public class DatabaseConnection extends DatabaseInformation {
 
     // Connection
     private Connection connection;
-    private String url = this.getUrl();
-    private String user = this.getUser();
-    private String password = this.getPassword();
-    private String forNameData = this.getForNameData();
+    private String url = super.getUrl(); // super keywordu üst atadan veri almak için kullandım
+    private String user = super.getUser();
+    private String password = super.getPassword();
+    private String forNameData = super.getForNameData();
 
     // Singleton Design Pattern
     // Singleton Class
@@ -30,7 +30,8 @@ public class DatabaseConnection extends DatabaseInformation {
             // Database ilgili class erişim sağlamak
             Class.forName("com.mysql.jdbc.Driver");
             log.info("Driver Yüklendi");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/blog", "root", "root");
+            //connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/blog", "root", "root");
+            connection = DriverManager.getConnection(url, user, password);
             log.info("Database Bağlantısını Başarılı");
         } catch (Exception exception) {
             log.error(DatabaseConnection.class + " Driver or connection Failed !!!!");

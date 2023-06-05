@@ -4,7 +4,7 @@ import lombok.Data;
 
 // LOMBOK
 @Data
-abstract public class DatabaseInformation {
+public class DatabaseInformation {
     private String url;
     private String user;
     private String password;

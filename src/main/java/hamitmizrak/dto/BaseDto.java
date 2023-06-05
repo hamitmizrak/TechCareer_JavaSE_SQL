@@ -5,8 +5,7 @@ import lombok.*;
 import java.util.Date;
 
 // LOMBOK
-@Getter @Setter
-
+@Data
 abstract public class BaseDto {
     private Long id;
     private Date createdDate;
