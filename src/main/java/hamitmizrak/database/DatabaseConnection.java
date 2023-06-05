@@ -28,9 +28,9 @@ public class DatabaseConnection extends DatabaseInformation {
     private DatabaseConnection() throws ClassNotFoundException, SQLException {
         try {
             // Database ilgili class erişim sağlamak
-            Class.forName(forNameData);
+            Class.forName("com.mysql.jdbc.Driver");
             log.info("Driver Yüklendi");
-            connection = DriverManager.getConnection(url, user, password);
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/blog", "root", "root");
             log.info("Database Bağlantısını Başarılı");
         } catch (Exception exception) {
             log.error(DatabaseConnection.class + " Driver or connection Failed !!!!");
@@ -57,7 +57,6 @@ public class DatabaseConnection extends DatabaseInformation {
 
     // PSVM
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        // DatabaseConnection databaseConnection=new DatabaseConnection();
+         DatabaseConnection databaseConnection=new DatabaseConnection();
     }
-
 } //end class

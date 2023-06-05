@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public interface IDaoConnection<T> {
 
     // CREATE
-    public void create(T t);
+    public void create(T t) throws SQLException, ClassNotFoundException;
 
     // UPDATE
     public void update(T t);

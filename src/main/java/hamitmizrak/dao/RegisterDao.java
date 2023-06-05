@@ -14,8 +14,12 @@ public class RegisterDao implements IDaoConnection<RegisterDto> {
 
     // CREATE
     @Override
-    public void create(RegisterDto registerDto) {
+    public void create(RegisterDto registerDto) throws SQLException, ClassNotFoundException {
         try (Connection connection = getInterfaceConnection()) {
+           // if(connection!=null){}
+            //Connection Transaction Öncelikle kapatmak
+            connection.setAutoCommit(false);
+
             // insert into blog.register (name,surname,email,password) values ("name44","surname44","email44@gmail.com","password44");
             String sql = "insert into blog.register (name,surname,email,password) values (?,?,?,?);";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -27,8 +31,12 @@ public class RegisterDao implements IDaoConnection<RegisterDto> {
             int rowsEffected = preparedStatement.executeUpdate();
             if(rowsEffected>0){
                 log.info(RegisterDto.class+" Ekleme Başarılı");
+                // transaction işlemi başarılıysa, işlem devam etsin
+                connection.commit();
             }else{
                 log.info(RegisterDto.class+" Başarısız Ekleme");
+                // transaction işlemi başarısızsa, işlem devam etmesinnn
+                connection.rollback();
             }
         } catch (SQLException sql) {
             sql.printStackTrace();
@@ -41,6 +49,8 @@ public class RegisterDao implements IDaoConnection<RegisterDto> {
     @Override
     public void update(RegisterDto registerDto) {
         try (Connection connection = getInterfaceConnection()) {
+            //Connection Transaction Öncelikle kapatmak
+            connection.setAutoCommit(false);
             // update  blog.register set name=?,surname=?,email=?,password=? where id=?;
             String sql = "update blog.register set name=?,surname=?,email=?,password=? where id=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -53,8 +63,12 @@ public class RegisterDao implements IDaoConnection<RegisterDto> {
             int rowsEffected = preparedStatement.executeUpdate();
             if(rowsEffected>0){
                 log.info(RegisterDto.class+" Güncelleme Başarılı");
+                // transaction işlemi başarılıysa, işlem devam etsin
+                connection.commit();
             }else{
                 log.info(RegisterDto.class+" Güncelleme Ekleme");
+                // transaction işlemi başarısızsa, işlem devam etmesinnn
+                connection.rollback();
             }
         } catch (SQLException sql) {
             sql.printStackTrace();
@@ -67,6 +81,8 @@ public class RegisterDao implements IDaoConnection<RegisterDto> {
     @Override
     public void delete(RegisterDto registerDto) {
         try (Connection connection = getInterfaceConnection()) {
+            //Connection Transaction Öncelikle kapatmak
+            connection.setAutoCommit(false);
             // delete from  blog.register  where id=?;
             String sql = "delete from  blog.register  where id=?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -75,8 +91,12 @@ public class RegisterDao implements IDaoConnection<RegisterDto> {
             int rowsEffected = preparedStatement.executeUpdate();
             if(rowsEffected>0){
                 log.info(RegisterDto.class+" Silme Başarılı");
+                // transaction işlemi başarılıysa, işlem devam etsin
+                connection.commit();
             }else{
                 log.info(RegisterDto.class+" Silme Ekleme");
+                // transaction işlemi başarısızsa, işlem devam etmesinnn
+                connection.rollback();
             }
         } catch (SQLException sql) {
             sql.printStackTrace();
